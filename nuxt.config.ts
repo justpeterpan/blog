@@ -14,4 +14,7 @@ export default defineNuxtConfig({
       interval: 10,
     },
   },
+  app: {
+    pageTransition: { name: 'page', mode: 'out-in' },
+  },
 })
