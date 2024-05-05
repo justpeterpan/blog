@@ -1,29 +1,28 @@
 <template>
   <div>
-    <div class="w-full p-4 bg-black text-white">
-      <ul class="flex flex-row justify-between">
-        <li>
-          <NuxtLink to="/" class="text-white">✦ Home</NuxtLink>
-        </li>
-        <li>
-          <NuxtLink to="/" class="text-white">✦ Exit</NuxtLink>
-        </li>
-      </ul>
-    </div>
     <ContentRenderer v-if="data" :value="data">
-      <h1 class="text-6xl pb-10 m-4">{{ data.title }}</h1>
+      <h1 class="text-6xl pb-2 ml-20 mt-10 sticky">{{ data.title }}</h1>
     </ContentRenderer>
-    <div class="m-4">
+    <div>
       <ContentList path="/posts" v-slot="{ list }">
-        <div class="grid gap-2 grid-cols-3">
+        <div class="grid gap-2 list-grid m-20">
           <NuxtLink
             v-for="post in list"
             :to="getSlug(post._path)"
             :key="post._path"
-            class="bg-green-200 h-64 w-64 rounded-2xl flex flex-col-reverse p-4 hover:translate-y-[-2px] duration-100 ease-linear hover:shadow-sm"
+            class="items-stretch bg-amber-200 size-full rounded-2xl flex flex-col-reverse p-4 hover:translate-y-[-2px] duration-100 ease-linear hover:shadow-sm"
           >
-            <h2>{{ post.title }}</h2>
-            <p>{{ post.description }}</p>
+            <div class="p-4">
+              <h2>{{ post.title }}</h2>
+              <p>{{ post.description }}</p>
+            </div>
+            <div class="flex justify-center">
+              <img
+                :src="post.image.src"
+                alt="blog post cover"
+                class="rounded-[32px] w-24 h-24 m-8 img-shadow"
+              />
+            </div>
           </NuxtLink>
         </div>
       </ContentList>
@@ -44,7 +43,7 @@ function getSlug(path: string) {
   return `/posts/${path.split('/').pop()}`
 }
 
-const { data } = await useAsyncData('page-data', () =>
+const { data } = await useLazyAsyncData('page-data', () =>
   queryContent('/').findOne()
 )
 </script>
@@ -54,19 +53,20 @@ const { data } = await useAsyncData('page-data', () =>
   transition: transform 0.4s, backdrop-filter 0.4s ease-in-out 0.2s;
 }
 
-.page-leave-active {
-  transition: backdrop-filter 0s, transform 0.4s;
-}
-
 .page-enter-from {
   transform: translateY(800px);
   backdrop-filter: brightness(1);
   opacity: 20;
 }
 
-.page-leave-to {
-  transform: translateY(100vh);
-  backdrop-filter: brightness(1);
-  opacity: 20;
+.list-grid {
+  grid-template-columns: repeat(auto-fit, minmax(272px, 1fr));
+}
+
+.img-shadow {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02), 0 4px 8px rgba(0, 0, 0, 0.03),
+    0 2px 4px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.05),
+    0 1px rgba(0, 0, 0, 0.06), 0 0 0 0.4375em rgba(0, 0, 0, 0.02),
+    0 24px 48px rgba(0, 0, 0, 0.08);
 }
 </style>
