@@ -1,6 +1,8 @@
 <template>
   <main class="backdrop-brightness-90 absolute top-0 w-full h-screen">
-    <div class="bg-white p-10 mt-20 sm:m-20 rounded-2xl shadow-sm">
+    <div
+      class="bg-white p-10 mt-20 sm:m-20 rounded-2xl shadow-sm sm:h-full h-screen"
+    >
       <ContentDoc v-slot="{ doc }">
         <h1 class="text-6xl pb-6">
           {{ doc.title }}
@@ -10,11 +12,16 @@
           class="flex justify-center py-8 sm:p-32 w-full bg-orange-50 mt-10 rounded-3xl"
         >
           <img
-            src="/musicbox.png"
+            v-if="doc.image.src"
+            :src="doc.image.src"
             alt="post about music"
             class="w-32 h-32 img-shadow rounded-[32px]"
           />
         </div>
+
+        <ClientOnly>
+          <div v-if="doc.spotify" v-html="doc.spotify" class="mt-10" />
+        </ClientOnly>
       </ContentDoc>
 
       <NuxtLink
