@@ -1,16 +1,18 @@
 <template>
   <div>
     <ContentRenderer v-if="data" :value="data">
-      <h1 class="text-6xl pb-2 ml-20 mt-10 sticky">{{ data.title }}</h1>
+      <h1 class="text-6xl pb-10 sm:pb-2 ml-20 mt-10 sticky">
+        {{ data.title }}
+      </h1>
     </ContentRenderer>
     <div>
       <ContentList path="/posts" v-slot="{ list }">
-        <div class="grid gap-2 list-grid m-20">
+        <div class="grid gap-2 list-grid mx-1 sm:m-20">
           <NuxtLink
             v-for="post in list"
             :to="getSlug(post._path)"
             :key="post._path"
-            class="items-stretch bg-amber-200 size-full rounded-2xl flex flex-col-reverse p-4 hover:translate-y-[-2px] duration-100 ease-linear hover:shadow-sm"
+            class="items-stretch bg-amber-200 sm:size-full rounded-2xl flex flex-col-reverse sm:p-4 hover:translate-y-[-2px] duration-100 ease-linear hover:shadow-sm"
           >
             <div class="p-4">
               <h2>{{ post.title }}</h2>
@@ -20,7 +22,7 @@
               <img
                 :src="post.image.src"
                 alt="blog post cover"
-                class="rounded-[32px] w-24 h-24 m-8 img-shadow"
+                class="rounded-[32px] w-20 h-20 sm:w-24 sm:h-24 mx-4 my-8 sm:m-8 img-shadow"
               />
             </div>
           </NuxtLink>

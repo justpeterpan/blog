@@ -1,13 +1,13 @@
 <template>
   <main class="backdrop-brightness-90 absolute top-0 w-full h-screen">
-    <div class="bg-white p-10 m-20 rounded-2xl shadow-sm">
+    <div class="bg-white p-10 mt-20 sm:m-20 rounded-2xl shadow-sm">
       <ContentDoc v-slot="{ doc }">
         <h1 class="text-6xl pb-6">
           {{ doc.title }}
         </h1>
         <p>{{ doc.description }}</p>
         <div
-          class="flex justify-center p-32 w-full bg-orange-50 mt-10 rounded-3xl"
+          class="flex justify-center py-8 sm:p-32 w-full bg-orange-50 mt-10 rounded-3xl"
         >
           <img
             src="/musicbox.png"
