@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxt/content', '@nuxtjs/tailwindcss'],
+  modules: ['@nuxt/content', '@nuxtjs/tailwindcss', "@tresjs/nuxt"],
   routeRules: {
     '/': { prerender: true },
     '/posts/**': { prerender: true, static: true, swr: true },
